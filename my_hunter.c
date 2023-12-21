@@ -88,13 +88,7 @@ int main(int argc, char **argv, char **envp)
         NULL,
         (sfSprite *[6]){(sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
         (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL},
-        MENU_ST,
-        sfClock_create(),
-        0,
-        3,
-        0,
-        sfText_create(),
-        true,
+        MENU_ST, sfClock_create(), 0, 3, 0, sfText_create(), true,
     };
     my_duck_t *duck = NULL;
 

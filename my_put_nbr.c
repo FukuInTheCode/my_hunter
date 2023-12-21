@@ -13,7 +13,7 @@ char *my_put_nbr(int nb, char buffer[1000])
     char tmp;
     long nb2 = nb;
 
-    for (int i = 0; i < 1000; buffer[i++] = 0);
+    for (int i = 0; i++ < 1000; buffer[i - 1] = 0);
     if (nb2 < 0)
         nb2 = -nb2;
     if (nb == 0 || nb == -0)
