@@ -27,6 +27,7 @@ SRC	= my_hunter.c \
 	  handle_close.c \
 	  handle_args.c \
 	  handle_click.c \
+	  handle_key.c \
 	  handle_settings.c \
 	  enemy.c \
 	  my_strlen.c \

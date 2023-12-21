@@ -24,6 +24,7 @@ static int setup_backgrounds2(my_window_t *wt, sfVector2u w_size)
         sfSprite_getGlobalBounds(wt->bgs[6]).width +
         sfSprite_getGlobalBounds(wt->bgs[7]).width / 2.,
         w_size.y / 2.});
+    sfSprite_setScale(wt->bgs[8], (sfVector2f){1, 1});
     return 0;
 }
 
@@ -59,7 +60,7 @@ static int setup_backgrounds(my_window_t *wt)
     wt->music = sfMusic_createFromFile("./assets/my_hunter_game_ost.ogg");
     if (!wt->w || !wt->text || !font || !wt->music)
         return 84;
-    for (uint8_t i = 0; i < 8; i++)
+    for (uint8_t i = 0; i < 9; i++)
         if (inside_loop(wt, w_size, i))
             return 84;
     return setup_backgrounds2(wt, w_size);
@@ -75,9 +76,9 @@ static int free_all(my_window_t *wt, my_duck_t *duck)
     sfClock_destroy(wt->clock);
     if (!wt->bgs[0])
         return error;
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 9; i++)
         sfTexture_destroy((void *)sfSprite_getTexture(wt->bgs[i]));
-    for (int i = 0; i < 8; sfSprite_destroy(wt->bgs[i++]));
+    for (int i = 0; i < 9; sfSprite_destroy(wt->bgs[i++]));
     if (!duck)
         return error;
     for (int i = 0; i < 2; sfTexture_destroy(duck->skins[i++]));

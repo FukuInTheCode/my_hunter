@@ -41,6 +41,7 @@ typedef enum {
     GAME_ST = 2,
     SETTINGS_VID_ST = 4,
     GAMEOVER_ST = 8,
+    SETTINGS_AUD_ST = 16,
 } my_status_t;
 
 typedef struct {
@@ -92,6 +93,7 @@ int gen_var(my_window_t *, my_duck_t *);
 int handle_setting(sfEvent *, my_window_t *);
 int handle_close(sfEvent *, my_window_t *);
 int handle_click(sfEvent *, my_window_t *, my_duck_t *);
+int handle_key(sfEvent *, my_window_t *);
 int handle_args(int, char **, char **);
 
 size_t my_strlen(char const *);
@@ -107,6 +109,7 @@ char *my_revstr(char *);
 double get_spawn_chance(my_window_t *);
 
 static my_evt_t const my_events[] = {
+    {sfEvtKeyPressed, handle_key},
     {sfEvtMouseButtonPressed, handle_click},
     {sfEvtClosed, handle_close},
     {sfEvtCount, NULL},
@@ -116,6 +119,7 @@ static char const *paths[] __attribute__((unused)) =
     {"./assets/background_day.png",
     "./assets/background_night.jpg", "./assets/title_screen.png",
     "./assets/game_over.png", "./assets/tryagain.png",
-    "./assets/menu.png", "./assets/start_btn.png", "./assets/setting_btn.png"};
+    "./assets/menu.png", "./assets/start_btn.png", "./assets/setting_btn.png",
+    "./assets/audio_setting_btn.png"};
 
 #endif
