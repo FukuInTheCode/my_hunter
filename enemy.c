@@ -10,8 +10,7 @@
 static sfTexture *set_texture(my_window_t *wt, my_duck_t *duck)
 {
     double spawn_rate = get_spawn_chance(wt);
-    uint8_t id = rand() % 101 < spawn_rate * 100;
-    id = !id;
+    uint8_t id = rand() % 101 >= spawn_rate * 100;
     sfTexture *t = duck->skins[id];
 
     duck->sprite_rect.width = id * (498 - 154) + 154;
@@ -90,10 +89,10 @@ int update_enemy(my_window_t *wt, my_duck_t *duck)
 my_duck_t *gen_enemy(my_window_t *wt)
 {
     my_duck_t *duck = malloc(sizeof(my_duck_t));
+
     duck->skins[0] = sfTexture_createFromFile("./assets/boo_sprite_sheet.png",
         NULL);
     duck->skins[1] = sfTexture_createFromFile("./assets/koopa.png", NULL);
-
     duck->sprite = sfSprite_create();
     duck->anim_n = 0;
     gen_enemy_info(wt, duck);

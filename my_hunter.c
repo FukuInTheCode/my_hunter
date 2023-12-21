@@ -85,6 +85,5 @@ int main(int argc, char **argv, char **envp)
     error |= setup_backgrounds(&wt);
     duck = gen_enemy(&wt);
     error |= game_loop(&wt, duck);
-    error |= free_all(&wt);
-    return error;
+    return error | free_all(&wt);
 }
