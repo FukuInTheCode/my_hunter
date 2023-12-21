@@ -39,7 +39,7 @@ typedef enum {
     NONE = 0,
     MENU_ST = 1,
     GAME_ST = 2,
-    SETTINGS_ST = 4,
+    SETTINGS_VID_ST = 4,
     GAMEOVER_ST = 8,
 } my_status_t;
 
@@ -82,12 +82,14 @@ int game_loop(my_window_t *, my_duck_t *);
 
 int display_gameover(my_window_t *, my_duck_t *);
 int display_menu(my_window_t *, my_duck_t *);
+int display_setting(my_window_t *, my_duck_t *);
 int display_game(my_window_t *, my_duck_t *);
 
 my_duck_t *gen_enemy(my_window_t *);
 int update_enemy(my_window_t *, my_duck_t *);
 int gen_var(my_window_t *, my_duck_t *);
 
+int handle_setting(sfEvent *, my_window_t *);
 int handle_close(sfEvent *, my_window_t *);
 int handle_click(sfEvent *, my_window_t *, my_duck_t *);
 int handle_args(int, char **, char **);

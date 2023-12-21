@@ -22,10 +22,12 @@ SRC	= my_hunter.c \
 	  game_loop.c \
 	  display_game.c \
 	  display_menu.c \
+	  display_setting.c \
 	  display_gameover.c \
 	  handle_close.c \
-	  handle_click.c \
 	  handle_args.c \
+	  handle_click.c \
+	  handle_settings.c \
 	  enemy.c \
 	  my_strlen.c \
 	  my_strncmp.c \

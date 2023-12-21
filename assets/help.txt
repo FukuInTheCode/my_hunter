@@ -9,9 +9,5 @@ Options:
 
 Game Controls:
   - Mouse Click:   Use the left mouse button to shoot targets.
-  - Escape Key:    Press the 'Escape' key to access the pause menu.
-
-Note: The game is designed to be played using only
-    mouse clicks and the 'Escape' key.
 
 

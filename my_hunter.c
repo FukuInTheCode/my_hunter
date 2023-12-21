@@ -106,8 +106,8 @@ int main(int argc, char **argv, char **envp)
     int error = 0;
     my_window_t wt = {
         NULL,
-        (sfSprite *[8]){(sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
-        (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
+        (sfSprite *[9]){(sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
+        (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
         (sfSprite *)NULL, (sfSprite *)NULL},
         MENU_ST, sfClock_create(), 0, 3, 0, sfText_create(), true, NULL,
     };
