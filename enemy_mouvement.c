@@ -34,7 +34,7 @@ int sin_movement(my_window_t *wt, my_duck_t *duck)
 
 func choose_movement_function(void)
 {
-    if (rand() % 2)
+    if (rand() % 3)
         return sin_movement;
     return linear_movement;
 }

@@ -38,7 +38,6 @@ static int handle_arrow(sfEvent *evt, my_window_t *wt)
     return 0;
 }
 
-
 static int handle_audio(sfEvent *evt, my_window_t *wt)
 {
     double vol = sfMusic_getVolume(wt->music);

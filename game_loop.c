@@ -7,6 +7,8 @@
 
 #include "include/my.h"
 #include "my.h"
+#include <SFML/Graphics/Text.h>
+#include <SFML/System/Time.h>
 
 static func choose_displayer(my_window_t *wt)
 {

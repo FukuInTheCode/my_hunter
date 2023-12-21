@@ -78,7 +78,7 @@ int update_enemy(my_window_t *wt, my_duck_t *duck)
     }
     duck_pos = sfSprite_getPosition(duck->sprite);
     if ((duck->is_right && duck_pos.x > w_size.x + 10 +
-        duck->sprite_rect.width) || duck_pos.y > w_size.y)
+        duck->sprite_rect.width) || duck_pos.x > w_size.x * 2.)
         gen_enemy_info(wt, duck);
     if (!duck->is_right && (duck_pos.x < -10 - duck->sprite_rect.width))
         gen_enemy_info(wt, duck);

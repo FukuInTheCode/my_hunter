@@ -15,10 +15,12 @@ static int handle_click_game(sfVector2i mouse_pos,
     sfVector2u w_size = sfRenderWindow_getSize(wt->w);
 
     if (sfFloatRect_contains(&sprite_rect, mouse_pos.x, mouse_pos.y)) {
-        sfSprite_move(duck->sprite,
+        sfSprite_setPosition(duck->sprite,
             (sfVector2f){w_size.x * 3., w_size.y * 3.});
         update_enemy(wt, duck);
         wt->score++;
+        if (sprite_rect.width == 154)
+            wt->score++;
     } else {
         wt->lives--;
     }

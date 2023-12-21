@@ -67,7 +67,7 @@ static int setup_backgrounds(my_window_t *wt)
     if (!wt->w || !wt->text || !font || !wt->music)
         return 84;
     w_size = sfRenderWindow_getSize(wt->w);
-    sfRenderWindow_setFramerateLimit(wt->w, wt->fps_limit);
+    sfRenderWindow_setFramerateLimit(wt->w, 60);
     for (uint8_t i = 0; i < 10; i++)
         if (inside_loop(wt, w_size, i))
             return 84;
