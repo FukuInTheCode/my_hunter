@@ -6,7 +6,6 @@
 */
 
 #include "my.h"
-#include <SFML/Graphics/Font.h>
 
 static int setup_backgrounds2(my_window_t *wt, sfVector2u w_size)
 {
