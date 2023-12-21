@@ -1,8 +1,7 @@
 Usage: ./my_hunter
 
 Description:
-  A simple hunting game where you use the
-  mouse to shoot targets and the 'Escape' key to access the pause menu.
+  A simple hunting game where you use the mouse to shoot targets;
   The boo give 2 points and the koopa only 1 point!
 
 Options:
