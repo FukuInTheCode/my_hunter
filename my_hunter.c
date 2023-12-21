@@ -7,29 +7,32 @@
 
 #include "include/my.h"
 #include "my.h"
+#include <SFML/Graphics/Rect.h>
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Sprite.h>
 
-static int game_loop(my_window_t *wt)
+static int setup_backgrounds(my_window_t *wt)
 {
-    int error = 0;
+    char *paths[] = {"./assets/background_day.png",
+        "./assets/background_night.jpg"};
+    sfTexture *t;
+    sfVector2u w_size = sfRenderWindow_getSize(wt->w);
+    sfVector2u t_size;
+    sfColor col;
 
-    for (; sfRenderWindow_isOpen(wt->w);) {
-        sfRenderWindow_drawSprite(wt->w, wt->bgs[0], NULL);
-        sfRenderWindow_display(wt->w);
+    for (uint8_t i = 0; i < 2; i++) {
+        t = sfTexture_createFromFile(paths[i], NULL);
+        t_size = sfTexture_getSize(t);
+        wt->bgs[i] = sfSprite_create();
+        sfSprite_setTexture(wt->bgs[i], t, sfFalse);
+        sfSprite_setScale(wt->bgs[i],
+            (sfVector2f){w_size.x / (float)t_size.x,
+            w_size.y / (float)t_size.y});
+        col = sfSprite_getColor(wt->bgs[i]);
+        col.a = 255 * (i == 0);
+        sfSprite_setColor(wt->bgs[i], col);
     }
-    return error;
-}
-
-static int setup_backgrounds(sfSprite *bgs[2])
-{
-    int error = 0;
-    sfTexture *bg1 = sfTexture_createFromFile(
-        "./assets/background_day.png", NULL);
-
-    bgs[0] = sfSprite_create();
-    sfSprite_setTexture(bgs[0], bg1, sfTrue);
-    return error;
+    return 0;
 }
 
 static int free_all(my_window_t *wt)
@@ -45,12 +48,13 @@ int main(int argc, char **argv)
 {
     int error = 0;
     my_window_t wt = {
-        sfRenderWindow_create((sfVideoMode){1080, 720, 32}, "my_hunter",
+        sfRenderWindow_create((sfVideoMode){1200, 675, 32}, "my_hunter",
         sfTitlebar| sfClose | sfResize, NULL),
-        (sfSprite *[2]){(sfSprite *)NULL, (sfSprite *)NULL}
+        (sfSprite *[2]){(sfSprite *)NULL, (sfSprite *)NULL},
+        GAME_ST
     };
 
-    error |= setup_backgrounds(wt.bgs);
+    error |= setup_backgrounds(&wt);
     error |= game_loop(&wt);
     error |= free_all(&wt);
     return error;

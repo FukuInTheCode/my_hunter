@@ -7,6 +7,7 @@
 
 #ifndef MY_H
     #define MY_H
+    #include <SFML/Window/Event.h>
     #include <stdio.h>
     #include <unistd.h>
     #include <stdint.h>
@@ -32,15 +33,42 @@
     #include <SFML/Window.h>
 
 typedef struct {} my_duct_t;
+typedef int(*func)();
+
+typedef enum {
+    NONE = 0,
+    MENU_ST = 1,
+    GAME_ST = 2,
+    SETTINGS_ST = 4,
+} my_status_t;
 
 typedef struct {
     sfRenderWindow *w;
     sfSprite **bgs;
+    my_status_t status;
 } my_window_t;
 
 typedef struct {
     sfSprite *sprite;
     my_duct_t *next;
 } my_duck_t;
+
+typedef struct {
+    sfEventType type;
+    func f;
+} my_evt_t;
+
+int do_events_loop(my_window_t *);
+
+int game_loop(my_window_t *);
+
+int display_game(my_window_t *);
+
+int handle_close(my_window_t *);
+
+static my_evt_t const my_events[] = {
+    {sfEvtClosed, handle_close},
+    {sfEvtCount, NULL},
+};
 
 #endif

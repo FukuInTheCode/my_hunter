@@ -18,6 +18,10 @@ CSFML = -lcsfml-system -lcsfml-window -lcsfml-network \
 CRITERION = -lcriterion
 
 SRC	= my_hunter.c \
+	  manage_event.c \
+	  game_loop.c \
+	  display_game.c \
+	  handle_close.c \
 
 OBJ	= $(SRC:.c=.o)
 
