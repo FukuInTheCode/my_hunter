@@ -5,11 +5,7 @@
 ** Placeholder
 */
 
-#include "include/my.h"
 #include "my.h"
-#include <SFML/Graphics/Rect.h>
-#include <SFML/Graphics/RenderWindow.h>
-#include <SFML/Graphics/Sprite.h>
 
 static int setup_backgrounds(my_window_t *wt)
 {
@@ -44,7 +40,7 @@ static int free_all(my_window_t *wt)
     return error;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
     int error = 0;
     my_window_t wt = {
@@ -53,9 +49,12 @@ int main(int argc, char **argv)
         (sfSprite *[2]){(sfSprite *)NULL, (sfSprite *)NULL},
         GAME_ST
     };
+    my_duck_t *ducks = NULL;
 
+    srand(time(0));
+    add_enemy(&wt, &ducks);
     error |= setup_backgrounds(&wt);
-    error |= game_loop(&wt);
+    error |= game_loop(&wt, &ducks);
     error |= free_all(&wt);
     return error;
 }

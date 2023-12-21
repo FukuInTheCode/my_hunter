@@ -19,6 +19,7 @@ CRITERION = -lcriterion
 
 SRC	= my_hunter.c \
 	  manage_event.c \
+	  enemies.c \
 	  game_loop.c \
 	  display_game.c \
 	  handle_close.c \

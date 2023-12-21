@@ -5,9 +5,7 @@
 ** Placeholder
 */
 
-#include "include/my.h"
 #include "my.h"
-#include <SFML/Graphics/RenderWindow.h>
 
 static func choose_displayer(my_window_t *wt)
 {
@@ -16,7 +14,7 @@ static func choose_displayer(my_window_t *wt)
     return NULL;
 }
 
-int game_loop(my_window_t *wt)
+int game_loop(my_window_t *wt, my_duck_t **ducks)
 {
     int error = 0;
     func displayer = NULL;
@@ -25,7 +23,7 @@ int game_loop(my_window_t *wt)
         do_events_loop(wt);
         displayer = choose_displayer(wt);
         if (displayer != NULL)
-            displayer(wt);
+            displayer(wt, ducks);
         sfRenderWindow_display(wt->w);
     }
     return error;

@@ -7,11 +7,12 @@
 
 #include "my.h"
 
-int display_game(my_window_t *wt)
+int display_game(my_window_t *wt, my_duck_t **duck)
 {
     int error = 0;
 
     sfRenderWindow_drawSprite(wt->w, wt->bgs[0], NULL);
     sfRenderWindow_drawSprite(wt->w, wt->bgs[1], NULL);
+    draw_enemies(wt, *duck);
     return error;
 }

@@ -32,7 +32,6 @@
     #include <SFML/System.h>
     #include <SFML/Window.h>
 
-typedef struct {} my_duct_t;
 typedef int(*func)();
 
 typedef enum {
@@ -48,9 +47,9 @@ typedef struct {
     my_status_t status;
 } my_window_t;
 
-typedef struct {
+typedef struct my_duck {
     sfSprite *sprite;
-    my_duct_t *next;
+    struct my_duck *next;
 } my_duck_t;
 
 typedef struct {
@@ -60,9 +59,12 @@ typedef struct {
 
 int do_events_loop(my_window_t *);
 
-int game_loop(my_window_t *);
+int game_loop(my_window_t *, my_duck_t **);
 
-int display_game(my_window_t *);
+int display_game(my_window_t *, my_duck_t **);
+
+int add_enemy(my_window_t *, my_duck_t **);
+int draw_enemies(my_window_t *, my_duck_t *);
 
 int handle_close(my_window_t *);
 
