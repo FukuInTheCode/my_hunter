@@ -12,7 +12,7 @@ int linear_movement(my_window_t *wt, my_duck_t *duck)
     sfVector2f sprite_pos = sfSprite_getPosition(duck->sprite);
 
     sprite_pos.x += (duck->is_right - !duck->is_right)
-        * 1 * (wt->score + 1.);
+        * 1 * (wt->score + 1.) * ((duck->sprite_rect.width != 498) + 1);
     sprite_pos.y = duck->linear_y;
     sfSprite_setPosition(duck->sprite, sprite_pos);
     return 0;
