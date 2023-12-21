@@ -84,7 +84,8 @@ static int game(my_window_t *wt, my_duck_t **duck)
     if (error)
         return error;
     *duck = gen_enemy(wt);
-    if (!(*duck) || !(*duck)->sprite || !(*duck)->skins[0] || !(*duck)->skins[1])
+    if (!(*duck) || !(*duck)->sprite ||
+        !(*duck)->skins[0] || !(*duck)->skins[1])
         return 84;
     error |= game_loop(wt, *duck);
     return error;
