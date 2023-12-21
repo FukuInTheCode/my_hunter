@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include <SFML/Graphics/Rect.h>
 
 static int handle_click_game(sfVector2i mouse_pos,
     my_window_t *wt, my_duck_t *duck)
@@ -49,11 +50,14 @@ static int handle_click_menu(sfVector2i mouse_pos, my_window_t *wt,
     my_duck_t *duck)
 {
     sfVector2u w_size = sfRenderWindow_getSize(wt->w);
+    sfFloatRect rect = sfSprite_getGlobalBounds(wt->bgs[6]);
 
-    wt->status = GAME_ST;
-    wt->lives = 3;
-    wt->score = 0;
-    sfSprite_move(duck->sprite, (sfVector2f){0., w_size.y * 4.});
+    if (sfFloatRect_contains(&rect, mouse_pos.x, mouse_pos.y)) {
+        wt->status = GAME_ST;
+        wt->lives = 3;
+        wt->score = 0;
+        sfSprite_move(duck->sprite, (sfVector2f){0., w_size.y * 4.});
+    }
     return 0;
 }
 

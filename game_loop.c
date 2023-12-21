@@ -6,7 +6,6 @@
 */
 
 #include "my.h"
-#include <SFML/System/Clock.h>
 
 static func choose_displayer(my_window_t *wt)
 {

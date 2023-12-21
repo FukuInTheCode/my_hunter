@@ -114,6 +114,6 @@ static char const *paths[] __attribute__((unused)) =
     {"./assets/background_day.png",
     "./assets/background_night.jpg", "./assets/title_screen.png",
     "./assets/game_over.png", "./assets/tryagain.png",
-    "./assets/menu.png", "./assets/start_btn.png"};
+    "./assets/menu.png", "./assets/start_btn.png", "./assets/start_btn.png"};
 
 #endif
