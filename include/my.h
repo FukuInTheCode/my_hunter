@@ -56,6 +56,7 @@ typedef struct {
     sfText *text;
     bool is_day;
     sfMusic *music;
+    int fps_limit;
 } my_window_t;
 
 typedef struct {

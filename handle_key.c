@@ -38,6 +38,7 @@ static int handle_arrow(sfEvent *evt, my_window_t *wt)
     return 0;
 }
 
+
 static int handle_audio(sfEvent *evt, my_window_t *wt)
 {
     double vol = sfMusic_getVolume(wt->music);
@@ -56,6 +57,22 @@ static int handle_audio(sfEvent *evt, my_window_t *wt)
     return 0;
 }
 
+static int handle_video(sfEvent *evt, my_window_t *wt)
+{
+    if (wt->status != SETTINGS_VID_ST)
+        return 0;
+    if (sfKeyA == evt->key.code)
+        wt->fps_limit++;
+    if (sfKeyS == evt->key.code)
+        wt->fps_limit--;
+    if (wt->fps_limit > 1000)
+        wt->fps_limit = 1000;
+    if (wt->fps_limit < 30)
+        wt->fps_limit = 30;
+    sfRenderWindow_setFramerateLimit(wt->w, wt->fps_limit);
+    return 0;
+}
+
 int handle_key(sfEvent *evt, my_window_t *wt)
 {
     int ret = 0;
@@ -63,5 +80,6 @@ int handle_key(sfEvent *evt, my_window_t *wt)
     ret |= handle_escape(evt, wt);
     ret |= handle_arrow(evt, wt);
     ret |= handle_audio(evt, wt);
+    ret |= handle_video(evt, wt);
     return 0;
 }

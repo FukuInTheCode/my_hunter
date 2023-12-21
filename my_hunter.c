@@ -62,11 +62,12 @@ static int setup_backgrounds(my_window_t *wt)
 
     wt->w = sfRenderWindow_create((sfVideoMode){1200, 675, 32}, "my_hunter",
         sfTitlebar | sfClose, NULL);
-    w_size = sfRenderWindow_getSize(wt->w);
     sfText_setFont(wt->text, font);
     wt->music = sfMusic_createFromFile("./assets/my_hunter_game_ost.ogg");
     if (!wt->w || !wt->text || !font || !wt->music)
         return 84;
+    w_size = sfRenderWindow_getSize(wt->w);
+    sfRenderWindow_setFramerateLimit(wt->w, wt->fps_limit);
     for (uint8_t i = 0; i < 10; i++)
         if (inside_loop(wt, w_size, i))
             return 84;
@@ -117,7 +118,7 @@ int main(int argc, char **argv, char **envp)
         (sfSprite *[10]){(sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
         (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
         (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL},
-        MENU_ST, sfClock_create(), 0, 3, 0, sfText_create(), true, NULL,
+        MENU_ST, sfClock_create(), 0, 3, 0, sfText_create(), true, NULL, 60,
     };
     my_duck_t *duck = NULL;
 
