@@ -91,6 +91,7 @@ static int free_all(my_window_t *wt, my_duck_t *duck)
         return error;
     for (int i = 0; i < 2; sfTexture_destroy(duck->skins[i++]));
     sfSprite_destroy(duck->sprite);
+    sfMusic_destroy(wt->music);
     free(duck);
     return error;
 }
