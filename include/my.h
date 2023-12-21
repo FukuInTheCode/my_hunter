@@ -63,7 +63,8 @@ typedef struct {
         double linear_y;
     };
     sfTexture *skins[2];
-    uint8_t type;
+    sfIntRect sprite_rect;
+    double anime_time;
 } my_duck_t;
 
 typedef struct {
