@@ -32,6 +32,7 @@
     #include <SFML/System.h>
     #include <SFML/Window.h>
 
+
 typedef int(*func)();
 
 typedef enum {
@@ -39,17 +40,28 @@ typedef enum {
     MENU_ST = 1,
     GAME_ST = 2,
     SETTINGS_ST = 4,
+    GAMEOVER_ST = 8,
 } my_status_t;
 
 typedef struct {
     sfRenderWindow *w;
     sfSprite **bgs;
     my_status_t status;
+    sfClock *clock;
+    sfInt64 score;
+    uint8_t lives;
 } my_window_t;
 
-typedef struct my_duck {
+typedef struct {
     sfSprite *sprite;
-    struct my_duck *next;
+    sfBool is_right;
+    sfInt64 anim_n;
+    sfInt64 move_n;
+    func move;
+    union {
+        double sin_a[3];
+        double linear_y;
+    };
 } my_duck_t;
 
 typedef struct {
@@ -57,20 +69,39 @@ typedef struct {
     func f;
 } my_evt_t;
 
-int do_events_loop(my_window_t *);
+int do_events_loop(my_window_t *, my_duck_t *);
 
-int game_loop(my_window_t *, my_duck_t **);
+int game_loop(my_window_t *, my_duck_t *);
 
-int display_game(my_window_t *, my_duck_t **);
+int display_gameover(my_window_t *, my_duck_t *);
+int display_menu(my_window_t *, my_duck_t *);
+int display_game(my_window_t *, my_duck_t *);
 
-int add_enemy(my_window_t *, my_duck_t **);
-int draw_enemies(my_window_t *, my_duck_t *);
+my_duck_t *gen_enemy(my_window_t *);
+int update_enemy(my_window_t *, my_duck_t *);
+int gen_var(my_window_t *, my_duck_t *);
 
-int handle_close(my_window_t *);
+int handle_close(sfEvent *, my_window_t *);
+int handle_click(sfEvent *, my_window_t *, my_duck_t *);
+int handle_args(int, char **, char **);
+
+size_t my_strlen(char const *);
+int my_strncmp(char const *, char const *, int);
+
+int sin_movement(my_window_t *, my_duck_t *);
+int linear_movement(my_window_t *, my_duck_t *);
+func choose_movement_function(void);
 
 static my_evt_t const my_events[] = {
+    {sfEvtMouseButtonPressed, handle_click},
     {sfEvtClosed, handle_close},
     {sfEvtCount, NULL},
 };
+
+static char const *paths[] __attribute__((unused)) =
+    {"./assets/background_day.png",
+    "./assets/background_night.jpg", "./assets/title_screen.png",
+    "./assets/game_over.png", "./assets/tryagain.png",
+    "./assets/menu.png"};
 
 #endif

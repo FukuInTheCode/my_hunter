@@ -11,19 +11,24 @@ static func choose_displayer(my_window_t *wt)
 {
     if (wt->status == GAME_ST)
         return display_game;
+    if (wt->status == GAMEOVER_ST)
+        return display_gameover;
+    if (wt->status == MENU_ST)
+        return display_menu;
     return NULL;
 }
 
-int game_loop(my_window_t *wt, my_duck_t **ducks)
+int game_loop(my_window_t *wt, my_duck_t *duck)
 {
     int error = 0;
     func displayer = NULL;
 
-    for (; sfRenderWindow_isOpen(wt->w);) {
-        do_events_loop(wt);
+    for (sfClock_restart(wt->clock); sfRenderWindow_isOpen(wt->w);) {
+        sfRenderWindow_clear(wt->w, sfBlack);
+        do_events_loop(wt, duck);
         displayer = choose_displayer(wt);
         if (displayer != NULL)
-            displayer(wt, ducks);
+            displayer(wt, duck);
         sfRenderWindow_display(wt->w);
     }
     return error;
