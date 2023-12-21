@@ -29,6 +29,8 @@ static int inside_loop(my_window_t *wt, sfVector2u w_size, uint8_t i)
     t = sfTexture_createFromFile(paths[i], NULL);
     t_size = sfTexture_getSize(t);
     wt->bgs[i] = sfSprite_create();
+    if (!t || !wt->bgs[i])
+        return 84;
     sfSprite_setTexture(wt->bgs[i], t, sfFalse);
     sfSprite_setScale(wt->bgs[i], (sfVector2f){w_size.x / (float)t_size.x,
         w_size.y / (float)t_size.y});
@@ -47,8 +49,12 @@ static int setup_backgrounds(my_window_t *wt)
         sfTitlebar | sfClose, NULL);
     w_size = sfRenderWindow_getSize(wt->w);
     sfText_setFont(wt->text, font);
+    wt->music = sfMusic_createFromFile("./assets/my_hunter_game_ost.ogg");
+    if (!wt->w || !wt->text || !font || !wt->music)
+        return 84;
     for (uint8_t i = 0; i < 6; i++)
-        inside_loop(wt, w_size, i);
+        if (inside_loop(wt, w_size, i))
+            return 84;
     return setup_backgrounds2(wt, w_size);
 }
 
@@ -76,7 +82,11 @@ static int game(my_window_t *wt, my_duck_t **duck)
     int error = 0;
 
     error |= setup_backgrounds(wt);
+    if (error)
+        return error;
     *duck = gen_enemy(wt);
+    if (!(*duck) || !(*duck)->sprite || !(*duck)->skins[0] || !(*duck)->skins[1])
+        return 84;
     error |= game_loop(wt, *duck);
     return error;
 }
@@ -88,7 +98,7 @@ int main(int argc, char **argv, char **envp)
         NULL,
         (sfSprite *[6]){(sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
         (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL},
-        MENU_ST, sfClock_create(), 0, 3, 0, sfText_create(), true,
+        MENU_ST, sfClock_create(), 0, 3, 0, sfText_create(), true, NULL,
     };
     my_duck_t *duck = NULL;
 

@@ -53,6 +53,7 @@ typedef struct {
     uint64_t bg_n;
     sfText *text;
     bool is_day;
+    sfMusic *music;
 } my_window_t;
 
 typedef struct {

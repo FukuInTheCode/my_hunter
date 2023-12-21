@@ -90,11 +90,17 @@ my_duck_t *gen_enemy(my_window_t *wt)
 {
     my_duck_t *duck = malloc(sizeof(my_duck_t));
 
+    if (!duck)
+        return NULL;
     duck->skins[0] = sfTexture_createFromFile("./assets/boo_sprite_sheet.png",
         NULL);
     duck->skins[1] = sfTexture_createFromFile("./assets/koopa.png", NULL);
     duck->sprite = sfSprite_create();
     duck->anim_n = 0;
+    if (!duck->skins[0] || !duck->skins[1]) {
+        free(duck);
+        return NULL;
+    }
     gen_enemy_info(wt, duck);
     return duck;
 }
