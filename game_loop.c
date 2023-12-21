@@ -24,6 +24,8 @@ int game_loop(my_window_t *wt, my_duck_t *duck)
     int error = 0;
     func displayer = NULL;
 
+    sfMusic_setLoop(wt->music, sfTrue);
+    sfMusic_play(wt->music);
     wt->bg_n = sfClock_getElapsedTime(wt->clock).microseconds / 1e5;
     for (sfClock_restart(wt->clock); sfRenderWindow_isOpen(wt->w);) {
         sfRenderWindow_clear(wt->w, sfBlack);

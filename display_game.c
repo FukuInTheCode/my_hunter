@@ -32,7 +32,6 @@ int display_game(my_window_t *wt, my_duck_t *duck)
     display_score(wt);
     if (elapsed / 1e5 - wt->bg_n > 1.) {
         col.a += (wt->is_day - !wt->is_day);
-        printf("%d\n", col.a);
         if (col.a == 255 || col.a == 0)
             wt->is_day = !wt->is_day;
         wt->bg_n++;
