@@ -68,6 +68,16 @@ static int free_all(my_window_t *wt, my_duck_t *duck)
     return error;
 }
 
+static int game(my_window_t *wt, my_duck_t **duck)
+{
+    int error = 0;
+
+    error |= setup_backgrounds(wt);
+    *duck = gen_enemy(wt);
+    error |= game_loop(wt, *duck);
+    return error;
+}
+
 int main(int argc, char **argv, char **envp)
 {
     int error = 0;
@@ -87,8 +97,6 @@ int main(int argc, char **argv, char **envp)
     error |= handle_args(argc, argv, envp);
     if (error)
         return (error == 1 ? 0 : error) + free_all(&wt, duck);
-    error |= setup_backgrounds(&wt);
-    duck = gen_enemy(&wt);
-    error |= game_loop(&wt, duck);
+    error |= game(&wt, &duck);
     return error | free_all(&wt, duck);
 }
