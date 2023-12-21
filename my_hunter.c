@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include <SFML/Graphics/Font.h>
 
 static int setup_backgrounds2(my_window_t *wt, sfVector2u w_size)
 {
@@ -40,10 +41,12 @@ static int inside_loop(my_window_t *wt, sfVector2u w_size, uint8_t i)
 static int setup_backgrounds(my_window_t *wt)
 {
     sfVector2u w_size;
+    sfFont *font = sfFont_createFromFile("./assets/Delfino.ttf");
 
     wt->w = sfRenderWindow_create((sfVideoMode){1200, 675, 32}, "my_hunter",
-        sfTitlebar | sfClose | sfResize, NULL);
+        sfTitlebar | sfClose, NULL);
     w_size = sfRenderWindow_getSize(wt->w);
+    sfText_setFont(wt->text, font);
     for (uint8_t i = 0; i < 6; i++)
         inside_loop(wt, w_size, i);
     return setup_backgrounds2(wt, w_size);
@@ -90,6 +93,8 @@ int main(int argc, char **argv, char **envp)
         0,
         3,
         0,
+        sfText_create(),
+        true,
     };
     my_duck_t *duck = NULL;
 

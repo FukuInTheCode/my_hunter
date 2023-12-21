@@ -24,7 +24,7 @@ int game_loop(my_window_t *wt, my_duck_t *duck)
     int error = 0;
     func displayer = NULL;
 
-    wt->bg_n = sfClock_getElapsedTime(wt->clock).microseconds / 5e6;
+    wt->bg_n = sfClock_getElapsedTime(wt->clock).microseconds / 1e5;
     for (sfClock_restart(wt->clock); sfRenderWindow_isOpen(wt->w);) {
         sfRenderWindow_clear(wt->w, sfBlack);
         do_events_loop(wt, duck);

@@ -31,9 +31,13 @@ static int handle_click_gameover(sfVector2i mouse_pos, my_window_t *wt,
 {
     sfFloatRect rect = sfSprite_getGlobalBounds(wt->bgs[4]);
     sfFloatRect rect2 = sfSprite_getGlobalBounds(wt->bgs[5]);
+    sfColor col = sfSprite_getColor(wt->bgs[1]);
 
     wt->lives = 3;
     wt->score = 0;
+    col.a = 0;
+    sfSprite_setColor(wt->bgs[1], col);
+    wt->is_day = true;
     if (sfFloatRect_contains(&rect, mouse_pos.x, mouse_pos.y))
         wt->status = GAME_ST;
     if (sfFloatRect_contains(&rect2, mouse_pos.x, mouse_pos.y))

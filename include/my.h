@@ -51,6 +51,8 @@ typedef struct {
     sfInt64 score;
     uint8_t lives;
     uint64_t bg_n;
+    sfText *text;
+    bool is_day;
 } my_window_t;
 
 typedef struct {
@@ -95,6 +97,9 @@ int my_strncmp(char const *, char const *, int);
 int sin_movement(my_window_t *, my_duck_t *);
 int linear_movement(my_window_t *, my_duck_t *);
 func choose_movement_function(void);
+
+char *my_put_nbr(int, char[1000]);
+char *my_revstr(char *);
 
 double get_spawn_chance(my_window_t *);
 
