@@ -5,6 +5,7 @@
 ** Placeholder
 */
 
+#include "include/my.h"
 #include "my.h"
 
 static func choose_displayer(my_window_t *wt)
@@ -15,7 +16,7 @@ static func choose_displayer(my_window_t *wt)
         return display_gameover;
     if (wt->status == MENU_ST)
         return display_menu;
-    if (wt->status == SETTINGS_VID_ST)
+    if (wt->status == SETTINGS_VID_ST || wt->status == SETTINGS_AUD_ST)
         return display_setting;
     return NULL;
 }

@@ -36,12 +36,12 @@
 typedef int(*func)();
 
 typedef enum {
-    NONE = 0,
-    MENU_ST = 1,
-    GAME_ST = 2,
-    SETTINGS_VID_ST = 4,
-    GAMEOVER_ST = 8,
-    SETTINGS_AUD_ST = 16,
+    NONE,
+    MENU_ST,
+    GAME_ST,
+    GAMEOVER_ST,
+    SETTINGS_VID_ST,
+    SETTINGS_AUD_ST,
 } my_status_t;
 
 typedef struct {
@@ -120,6 +120,6 @@ static char const *paths[] __attribute__((unused)) =
     "./assets/background_night.jpg", "./assets/title_screen.png",
     "./assets/game_over.png", "./assets/tryagain.png",
     "./assets/menu.png", "./assets/start_btn.png", "./assets/setting_btn.png",
-    "./assets/audio_setting_btn.png"};
+    "./assets/audio_setting_btn.png", "./assets/video_setting_btn.png"};
 
 #endif

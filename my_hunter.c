@@ -7,6 +7,13 @@
 
 #include "my.h"
 
+static int setup_backgrounds3(my_window_t *wt, sfVector2u w_size)
+{
+    sfSprite_setScale(wt->bgs[8], (sfVector2f){1e-1, 1e-1});
+    sfSprite_setScale(wt->bgs[9], (sfVector2f){2e-1, 2e-1});
+    return 0;
+}
+
 static int setup_backgrounds2(my_window_t *wt, sfVector2u w_size)
 {
     sfSprite_setScale(wt->bgs[5], (sfVector2f){25e-2, 25e-2});
@@ -24,7 +31,7 @@ static int setup_backgrounds2(my_window_t *wt, sfVector2u w_size)
         sfSprite_getGlobalBounds(wt->bgs[6]).width +
         sfSprite_getGlobalBounds(wt->bgs[7]).width / 2.,
         w_size.y / 2.});
-    sfSprite_setScale(wt->bgs[8], (sfVector2f){1, 1});
+    setup_backgrounds3(wt, w_size);
     return 0;
 }
 
@@ -60,7 +67,7 @@ static int setup_backgrounds(my_window_t *wt)
     wt->music = sfMusic_createFromFile("./assets/my_hunter_game_ost.ogg");
     if (!wt->w || !wt->text || !font || !wt->music)
         return 84;
-    for (uint8_t i = 0; i < 9; i++)
+    for (uint8_t i = 0; i < 10; i++)
         if (inside_loop(wt, w_size, i))
             return 84;
     return setup_backgrounds2(wt, w_size);
@@ -76,9 +83,9 @@ static int free_all(my_window_t *wt, my_duck_t *duck)
     sfClock_destroy(wt->clock);
     if (!wt->bgs[0])
         return error;
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 10; i++)
         sfTexture_destroy((void *)sfSprite_getTexture(wt->bgs[i]));
-    for (int i = 0; i < 9; sfSprite_destroy(wt->bgs[i++]));
+    for (int i = 0; i < 10; sfSprite_destroy(wt->bgs[i++]));
     if (!duck)
         return error;
     for (int i = 0; i < 2; sfTexture_destroy(duck->skins[i++]));
@@ -107,9 +114,9 @@ int main(int argc, char **argv, char **envp)
     int error = 0;
     my_window_t wt = {
         NULL,
-        (sfSprite *[9]){(sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
+        (sfSprite *[10]){(sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
         (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL,
-        (sfSprite *)NULL, (sfSprite *)NULL},
+        (sfSprite *)NULL, (sfSprite *)NULL, (sfSprite *)NULL},
         MENU_ST, sfClock_create(), 0, 3, 0, sfText_create(), true, NULL,
     };
     my_duck_t *duck = NULL;
