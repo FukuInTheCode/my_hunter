@@ -25,8 +25,8 @@ int sin_movement(my_window_t *wt, my_duck_t *duck)
 
     linear_movement(wt, duck);
     sprite_pos = sfSprite_getPosition(duck->sprite);
-    sprite_pos.y = duck->sin_a[0] * sin(sprite_pos.x / w_size.x + duck->sin_a[1])
-        + duck->sin_a[2];
+    sprite_pos.y = duck->sin_a[0] * sin(sprite_pos.x / w_size.x
+        + duck->sin_a[1]) + duck->sin_a[2];
     sprite_pos.y *= w_size.y;
     sfSprite_setPosition(duck->sprite, sprite_pos);
     return 0;
