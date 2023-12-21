@@ -10,8 +10,11 @@
 static sfTexture *set_texture(my_window_t *wt, my_duck_t *duck)
 {
     double spawn_rate = get_spawn_chance(wt);
+    uint8_t id = rand() % 101 < spawn_rate * 100;
+    sfTexture *t = duck->skins[id];
 
-    return duck->skins[rand() % 1001 < spawn_rate * 100];
+    duck->type = id;
+    return t;
 }
 
 static int gen_enemy_info(my_window_t *wt, my_duck_t *duck)
@@ -53,14 +56,15 @@ int update_enemy(my_window_t *wt, my_duck_t *duck)
 
     move_enemy(wt, duck, elapsed);
     if (elapsed / 5e5 - duck->anim_n > 1.) {
-        sprite_rect.left = 154 * (rand() % 27);
+        sprite_rect.left = (duck->type ? 498 : 154) *
+            (rand() % (duck->type ? 22 : 27));
         duck->anim_n++;
     }
     duck_pos = sfSprite_getPosition(duck->sprite);
-    if ((duck->is_right && duck_pos.x > w_size.x + 161) ||
-        duck_pos.y > w_size.y)
+    if ((duck->is_right && duck_pos.x > w_size.x + 10 +
+        (duck->type ? 498 : 154)) || duck_pos.y > w_size.y)
         gen_enemy_info(wt, duck);
-    if (!duck->is_right && duck_pos.x < -161)
+    if (!duck->is_right && duck_pos.x < -10 - (duck->type ? 498 : 154))
         gen_enemy_info(wt, duck);
     sfSprite_setTextureRect(duck->sprite, sprite_rect);
     return 0;
