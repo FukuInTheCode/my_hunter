@@ -11,11 +11,11 @@ static int handle_click_game(sfVector2i mouse_pos,
     my_window_t *wt, my_duck_t *duck)
 {
     sfFloatRect sprite_rect = sfSprite_getGlobalBounds(duck->sprite);
-    uint32_t w_y = sfRenderWindow_getSize(wt->w).y;
+    sfVector2u w_size = sfRenderWindow_getSize(wt->w);
 
     if (sfFloatRect_contains(&sprite_rect, mouse_pos.x, mouse_pos.y)) {
         sfSprite_move(duck->sprite,
-            (sfVector2f){0, w_y * 3.});
+            (sfVector2f){w_size.x * 3., w_size.y * 3.});
         update_enemy(wt, duck);
         wt->score++;
     } else {

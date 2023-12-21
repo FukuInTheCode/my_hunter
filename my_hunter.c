@@ -75,6 +75,7 @@ int main(int argc, char **argv, char **envp)
         sfClock_create(),
         0,
         3,
+        0,
     };
     my_duck_t *duck = NULL;
 

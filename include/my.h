@@ -50,6 +50,7 @@ typedef struct {
     sfClock *clock;
     sfInt64 score;
     uint8_t lives;
+    uint64_t bg_n;
 } my_window_t;
 
 typedef struct {
