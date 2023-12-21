@@ -31,6 +31,7 @@ SRC	= my_hunter.c \
 	  my_strncmp.c \
 	  enemy_mouvement.c \
 	  gen_enemy_var.c \
+	  handle_game.c \
 
 OBJ	= $(SRC:.c=.o)
 

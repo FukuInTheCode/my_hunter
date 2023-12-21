@@ -62,6 +62,7 @@ typedef struct {
         double sin_a[3];
         double linear_y;
     };
+    sfTexture *skins[2];
 } my_duck_t;
 
 typedef struct {
@@ -91,6 +92,8 @@ int my_strncmp(char const *, char const *, int);
 int sin_movement(my_window_t *, my_duck_t *);
 int linear_movement(my_window_t *, my_duck_t *);
 func choose_movement_function(void);
+
+double get_spawn_chance(my_window_t *);
 
 static my_evt_t const my_events[] = {
     {sfEvtMouseButtonPressed, handle_click},

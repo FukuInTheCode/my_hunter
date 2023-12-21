@@ -7,11 +7,19 @@
 
 #include "my.h"
 
+static sfTexture *set_texture(my_window_t *wt, my_duck_t *duck)
+{
+    double spawn_rate = get_spawn_chance(wt);
+
+    return duck->skins[rand() % 1001 < spawn_rate * 100];
+}
+
 static int gen_enemy_info(my_window_t *wt, my_duck_t *duck)
 {
     sfVector2u w_size = sfRenderWindow_getSize(wt->w);
     sfIntRect sprite_rect = {0, 0, 154, 134};
 
+    sfSprite_setTexture(duck->sprite, set_texture(wt, duck), sfTrue);
     duck->is_right = rand() % 2;
     sfSprite_setTextureRect(duck->sprite, sprite_rect);
     sfSprite_setRotation(duck->sprite, 0);
@@ -61,11 +69,10 @@ int update_enemy(my_window_t *wt, my_duck_t *duck)
 my_duck_t *gen_enemy(my_window_t *wt)
 {
     my_duck_t *duck = malloc(sizeof(my_duck_t));
-    sfTexture *t = sfTexture_createFromFile("./assets/boo_sprite_sheet.png",
+    duck->skins[0] = sfTexture_createFromFile("./assets/boo_sprite_sheet.png",
         NULL);
 
     duck->sprite = sfSprite_create();
-    sfSprite_setTexture(duck->sprite, t, sfTrue);
     duck->anim_n = 0;
     gen_enemy_info(wt, duck);
     return duck;
