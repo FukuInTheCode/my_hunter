@@ -32,7 +32,7 @@ static int handle_arrow(sfEvent *evt, my_window_t *wt)
         d = -1;
     if (wt->status == SETTINGS_VID_ST && sfKeyLeft == evt->key.code)
         d = 0;
-    if (wt->status == SETTINGS_CRE_ST && sfKeyRight == evt->key.code)
+    if (wt->status == SETTINGS_AUD_ST && sfKeyRight == evt->key.code)
         d = 0;
     wt->status += d;
     return 0;
