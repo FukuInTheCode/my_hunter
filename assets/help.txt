@@ -1,0 +1,17 @@
+Usage: ./my_hunter
+
+Description:
+  A simple hunting game where you use the
+  mouse to shoot targets and the 'Escape' key to access the pause menu.
+
+Options:
+  -h,       Display this help message and exit.
+
+Game Controls:
+  - Mouse Click:   Use the left mouse button to shoot targets.
+  - Escape Key:    Press the 'Escape' key to access the pause menu.
+
+Note: The game is designed to be played using only
+    mouse clicks and the 'Escape' key.
+
+

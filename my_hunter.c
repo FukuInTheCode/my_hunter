@@ -49,18 +49,22 @@ static int setup_backgrounds(my_window_t *wt)
     return setup_backgrounds2(wt, w_size);
 }
 
-static int free_all(my_window_t *wt)
+static int free_all(my_window_t *wt, my_duck_t *duck)
 {
     int error = 0;
 
     sfRenderWindow_destroy(wt->w);
-    sfSprite_destroy(wt->bgs[0]);
-    sfSprite_destroy(wt->bgs[1]);
-    sfSprite_destroy(wt->bgs[2]);
-    sfSprite_destroy(wt->bgs[3]);
-    sfSprite_destroy(wt->bgs[4]);
-    sfSprite_destroy(wt->bgs[5]);
     sfClock_destroy(wt->clock);
+    if (!wt->bgs[0])
+        return error;
+    for (int i = 0; i < 6; i++)
+        sfTexture_destroy((void *)sfSprite_getTexture(wt->bgs[i]));
+    for (int i = 0; i < 6; sfSprite_destroy(wt->bgs[i++]));
+    if (!duck)
+        return error;
+    for (int i = 0; i < 2; sfTexture_destroy(duck->skins[i++]));
+    sfSprite_destroy(duck->sprite);
+    free(duck);
     return error;
 }
 
@@ -80,10 +84,11 @@ int main(int argc, char **argv, char **envp)
     my_duck_t *duck = NULL;
 
     srand(time(0));
-    if (handle_args(argc, argv, envp) == 84)
-        return 84 + free_all(&wt);
+    error |= handle_args(argc, argv, envp);
+    if (error)
+        return (error == 1 ? 0 : error) + free_all(&wt, duck);
     error |= setup_backgrounds(&wt);
     duck = gen_enemy(&wt);
     error |= game_loop(&wt, duck);
-    return error | free_all(&wt);
+    return error | free_all(&wt, duck);
 }
