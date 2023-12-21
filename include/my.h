@@ -42,6 +42,7 @@ typedef enum {
     GAMEOVER_ST,
     SETTINGS_VID_ST,
     SETTINGS_AUD_ST,
+    SETTINGS_CRE_ST,
 } my_status_t;
 
 typedef struct {

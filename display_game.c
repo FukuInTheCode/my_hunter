@@ -15,6 +15,7 @@ static int display_score(my_window_t *wt)
     for (int i = 0; i++ < 8; str[i - 1] = base_str[i - 1]);
     my_put_nbr(wt->score, str + 8);
     sfText_setString(wt->text, str);
+    sfText_setPosition(wt->text, (sfVector2f){0, 0});
     sfRenderWindow_drawText(wt->w, wt->text, NULL);
     return 0;
 }
