@@ -3,6 +3,7 @@ Usage: ./my_hunter
 Description:
   A simple hunting game where you use the
   mouse to shoot targets and the 'Escape' key to access the pause menu.
+  The boo give 2 points and the koopa only 1 point!
 
 Options:
   -h,       Display this help message and exit.
@@ -10,7 +11,7 @@ Options:
 Game Controls:
   - Mouse Click:   Use the left mouse button to shoot targets.
   - Left and Right Arrow: Move in the setting.
-  - A and S:       Add or Subtract to the volume of the music.
+  - A and S:       Add or Subtract to the volume of the music or the fps limit.
   - Esc:           Exit the setting and go back to the base menu.
 
 
