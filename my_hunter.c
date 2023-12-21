@@ -62,6 +62,8 @@ static int free_all(my_window_t *wt, my_duck_t *duck)
     int error = 0;
 
     sfRenderWindow_destroy(wt->w);
+    sfFont_destroy((void *)sfText_getFont(wt->text));
+    sfText_destroy(wt->text);
     sfClock_destroy(wt->clock);
     if (!wt->bgs[0])
         return error;
